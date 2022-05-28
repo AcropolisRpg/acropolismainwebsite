@@ -1,0 +1,79 @@
+
+the setup of the server
+https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-20-04
+
+y la db
+https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-20-04-es
+
+contratio acropolis 
+https://remix.ethereum.org/#optimize=true&runs=200&evmVersion=null&version=soljson-v0.7.0+commit.9e61f92b.js
+
+para contratos inteligentes 
+https://remix.ethereum.org/#optimize=true&runs=200&evmVersion=null&version=soljson-v0.7.0+commit.9e61f92b.js
+
+el dashboard 
+https://dashboard.alchemyapi.io/explorer?time_min=1653322201511&time_range_preset=last5Minutes
+
+scp -r /c/Proyectos/web/* root@acropolisrpg.com:/root/airdrop
+scp -r /c/Proyectos/web/* root@acropolisrpg.com:/var/www/acropolisrpg.com/html
+scp -r /c/Proyectos/web/index.html root@acropolisrpg.com:/var/www/acropolisrpg.com/html
+cp -R web/* .
+rm -R web
+
+This is the official token for Acropolis MMORPG
+0x944d388039f3a4fce57ed86f80393990554830f6
+Ignacio Suarez
+support@acropolisrpg.com
+Acropolis MMORPG
+www.acropolisrpg.com
+support@acropolisrpg.com
+https://www.acropolisrpg.com/acropolislogo.png
+Acropolis will be a sandbox MMORPG  where players will have to hold at least 1 ACR acropolis token in their wallets in order to register and play the game, the game will be developed to be a open world with a market place allowing players to trade items inside the game.
+1. *Token IDO Address: 0x1BeDda29B3860d2AbE40A8f97047eFE01E184BC1
+
+2. *Token Sale Start Date:  22/2/2022
+
+3. *Token Sale End Date: 31/12/2022
+
+4.- Spending a maximum of 10,000 tokens by Airdrop
+
+$ scp -r /c/Proyectos/web/* root@acropolisrpg.com:/var/www/acropolisrpg.com/html
+
+
+
+sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u root --hp /root
+
+sudo nano /etc/nginx/sites-available/acropolisrpg.com
+
+
+var express = require('express');
+var app = express();
+var fs = require("fs");
+var user = {
+   "user4" : {
+      "name" : "mohit",
+      "password" : "password4",
+      "profession" : "teacher",
+      "id": 4
+   }
+}
+
+app.get('/:id', function (req, res) {
+      console.log( user );
+      res.end( JSON.stringify(user));
+})
+
+var server = app.listen(8081, function () {
+   var host = server.address().address
+   var port = server.address().port
+   console.log("Example app listening at http://%s:%s", host, port)
+})
+
+location /toti {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
