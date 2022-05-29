@@ -20,6 +20,26 @@ scp -r /c/Proyectos/web/index.html root@acropolisrpg.com:/var/www/acropolisrpg.c
 cp -R web/* .
 rm -R web
 
+scp -r /c/Proyectos/onlinemmorpg/stealth-magenta-lady/dist root@acropolisrpg.com:/root/game
+scp -r /c/Proyectos/onlinemmorpg/stealth-magenta-lady/dist/index.html root@acropolisrpg.com:/root/game/dist
+scp -r /c/Proyectos/onlinemmorpg/stealth-magenta-lady/public/scenes root@acropolisrpg.com:/root/game/public
+scp -r /c/Proyectos/onlinemmorpg/stealth-magenta-lady/public/atlas.png root@acropolisrpg.com:/root/game/public
+scp -r /c/Proyectos/onlinemmorpg/stealth-magenta-lady/public/client.js root@acropolisrpg.com:/root/game/public
+scp -r /c/Proyectos/onlinemmorpg/stealth-magenta-lady/public/forest.json root@acropolisrpg.com:/root/game/public
+scp -r /c/Proyectos/onlinemmorpg/stealth-magenta-lady/public/forest1.json root@acropolisrpg.com:/root/game/public
+scp -r /c/Proyectos/onlinemmorpg/stealth-magenta-lady/public/index.html root@acropolisrpg.com:/root/game/public
+scp -r /c/Proyectos/onlinemmorpg/stealth-magenta-lady/public/spikedballa.png root@acropolisrpg.com:/root/game/public
+scp -r /c/Proyectos/onlinemmorpg/stealth-magenta-lady/public/style.css root@acropolisrpg.com:/root/game/public
+
+scp -r /c/Proyectos/onlinemmorpg/stealth-magenta-lady/rpg-pack root@acropolisrpg.com:/root/game
+scp -r /c/Proyectos/onlinemmorpg/stealth-magenta-lady/utils root@acropolisrpg.com:/root/game
+scp -r /c/Proyectos/onlinemmorpg/stealth-magenta-lady/index.html root@acropolisrpg.com:/root/game
+scp -r /c/Proyectos/onlinemmorpg/stealth-magenta-lady/package.json root@acropolisrpg.com:/root/game
+scp -r /c/Proyectos/onlinemmorpg/stealth-magenta-lady/package-lock.json root@acropolisrpg.com:/root/game
+scp -r /c/Proyectos/onlinemmorpg/stealth-magenta-lady/script.js root@acropolisrpg.com:/root/game
+scp -r /c/Proyectos/onlinemmorpg/stealth-magenta-lady/server.js root@acropolisrpg.com:/root/game
+scp -r /c/Proyectos/onlinemmorpg/stealth-magenta-lady/style.css root@acropolisrpg.com:/root/game
+
 This is the official token for Acropolis MMORPG
 0x944d388039f3a4fce57ed86f80393990554830f6
 Ignacio Suarez
@@ -45,6 +65,17 @@ sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -
 
 sudo nano /etc/nginx/sites-available/acropolisrpg.com
 
+
+
+
+  location /game {
+        proxy_pass http://localhost:1234;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
 
 var express = require('express');
 var app = express();
