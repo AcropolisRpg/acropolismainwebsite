@@ -48,6 +48,7 @@ Author URL: http://w3layouts.com
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-TBY2FG9PGJ"></script>
 <script src ="https://cdn.jsdelivr.net/npm/@metamask/onboarding@1.0.1/dist/metamask-onboarding.bundle.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.4-rc.0/web3.min.js"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -553,7 +554,7 @@ Author URL: http://w3layouts.com
 	<script>
 		// const forwarderOrigin = 'http://localhost:9010';
 
-const initialize = async () => {
+window.onload = async () => {
 	  //Basic Actions Section
 		const onboardButton = document.getElementById('connectButton');
 		const sendButton = document.getElementById('sendButton');
@@ -562,6 +563,21 @@ const initialize = async () => {
 		sendButton.disabled = true
   	const getAccountsButton = document.getElementById('getAccounts');
   	const getAccountsResult = document.getElementById('getAccountsResult');
+		var ua = navigator.userAgent;
+
+		if((ua.match(/Android/i))){
+  const web3 = new Web3(window.ethereum);
+  
+  await window.ethereum.request({ method: 'eth_requestAccounts'});
+
+  // getting address from which we will sign message
+  const address = (await web3.eth.getAccounts())[0];
+	if(address){
+		sendButton.disabled = false;
+		onboardButton.innerText = address || 'Connect';
+	}
+}
+
 		const connected = async () => {
 			sendButton.disabled = false;
 			//we use eth_accounts because it returns a list of addresses owned by us.
@@ -569,6 +585,7 @@ const initialize = async () => {
 			//We take the first address in the array of addresses and display it
 			onboardButton.innerText = accounts[0] || 'Connect';
 		}
+
 	const isUnlocked = await window?.ethereum?._metamask.isUnlocked();
 	console.log(isUnlocked)
 	if(isUnlocked){
@@ -652,7 +669,6 @@ const initialize = async () => {
   MetaMaskClientCheck();
 };
 
-window.addEventListener('DOMContentLoaded', initialize);
 	</script>
 </body>	
 </html>
